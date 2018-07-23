@@ -1,0 +1,5 @@
+{
+  "name": "unsplash",
+  "alias": "unsplash-api.loganmcansh.com",
+  "dotenv": ".env"
+}

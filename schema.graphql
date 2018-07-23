@@ -1,0 +1,67 @@
+type Photo {
+  id: ID!,
+  created_at: String!,
+  updated_at: String!,
+  width: Int!,
+  height: Int!,
+  color: String!,
+  description: String,
+  sponsored: Boolean,
+  likes: Int!,
+  liked_by_user: Boolean,
+  slug: String,
+  user: User!
+  links: PhotoLinks!
+}
+
+type User {
+  id: ID!
+  updated_at: String!,
+  username: String!
+  name: String!
+  first_name: String!
+  last_name: String!
+  twitter_username: String
+  portfolio_url: String
+  bio: String
+  location: String
+  instagram_username: String
+  total_collections: Int!
+  total_likes: Int!
+  total_photos: Int!
+  profile_image: UserProfileImage!
+  links: UserLinks!
+}
+
+type UserProfileImage {
+  small: String!
+  medium: String!
+  large: String!
+}
+
+type UserLinks {
+  self: String!
+  html: String!
+  photos: String!
+  likes: String!
+  portfolio: String!
+  following: String!
+  followers: String!
+}
+
+type PhotoLinks {
+  self: String!
+  html: String!
+  download: String!
+  download_location: String!
+}
+
+type Query {
+  photos(count: Int, collections: Int, random: Boolean): [Photo!]!
+  getPhotoById(id: ID!): Photo!
+  me: String!
+}
+
+type Mutation {
+  likePhoto(id: ID!): Photo!
+}

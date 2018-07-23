@@ -28,11 +28,13 @@ type PhotoUrls {
   regular: String!
   small: String!
   thumb: String!
+  custom: String
 }
 
 type Query {
-  photos(count: Int, collections: Int, random: Boolean): [Photo!]!
-  getPhotoById(id: ID!): Photo!
+  photos(count: Int, page: Int, orderBy: String, curated: Boolean): [Photo!]!
+  randomPhoto(count: Int, collections: Int, featured: Boolean, query: String, width: Int, height: Int, username: String, orientation: String): [Photo!]!
+  getPhotoById(id: ID!, width: Int, height: Int): Photo!
 }
 
 type Mutation {

@@ -5,18 +5,52 @@ const headers = {
   Authorization: `Client-ID ${process.env.KEY}`,
 };
 
-const getUrl = ({ pathname = '/photos/random', count = 10, ...query }) => {
+const getUrl = ({
+  pathname = '/photos',
+  random,
+  count = 1,
+  orderBy,
+  curated,
+  width,
+  height,
+  ...query
+}) => {
   const defaultOptions = {
     protocol: 'https',
     hostname: 'api.unsplash.com',
     pathname,
-    query: {
-      count,
-      ...query,
-    },
+    query: { ...query },
   };
 
-  return format(defaultOptions);
+  if (width) {
+    defaultOptions.query.w = width;
+  }
+
+  if (height) {
+    defaultOptions.query.h = height;
+  }
+
+  if (curated) {
+    defaultOptions.pathname = '/photos/curated';
+  }
+
+  if (random) {
+    defaultOptions.pathname = '/photos/random';
+    defaultOptions.query.count = count;
+  }
+
+  if (count && !random) {
+    defaultOptions.query.per_page = count;
+  }
+
+  if (orderBy) {
+    defaultOptions.query.order_by = orderBy;
+  }
+
+  const url = format(defaultOptions);
+  console.log(url);
+
+  return url;
 };
 
 export const getPhotos = options => {
@@ -27,8 +61,10 @@ export const getPhotos = options => {
 
 export const me = () => 'suh';
 
-export const getPhotoById = async id => {
-  const url = getUrl({ pathname: `/photos/${id}` });
+export const getPhotoById = async ({ id, width, height }) => {
+  console.log(id, width, height);
+
+  const url = getUrl({ pathname: `/photos/${id}`, width, height });
 
   return fetch(url, { headers });
 };

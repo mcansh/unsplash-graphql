@@ -14,7 +14,10 @@ const resolvers = {
   },
   Query: {
     photos: async (_, options) => getPhotos(options).then(r => r.json()),
-    getPhotoById: async (_, { id }) => getPhotoById(id).then(r => r.json()),
+    randomPhoto: async (_, options) =>
+      getPhotos({ ...options, random: true }).then(r => r.json()),
+    getPhotoById: async (_, options) =>
+      getPhotoById(options).then(r => r.json()),
     me: async () => me(),
   },
 };

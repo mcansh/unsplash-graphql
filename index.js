@@ -1,8 +1,9 @@
 import { GraphQLServer } from 'graphql-yoga';
 import resolvers from './resolvers';
+import typeDefs from './typeDefs';
 
 const server = new GraphQLServer({
-  typeDefs: './schema.graphql',
+  typeDefs,
   resolvers,
 });
 

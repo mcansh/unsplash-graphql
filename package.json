@@ -19,6 +19,7 @@
     "esm": "3.0.72",
     "graphql-yoga": "1.14.12",
     "isomorphic-unfetch": "2.1.0",
+    "merge-graphql-schemas": "1.5.3",
     "prisma-binding": "2.1.1"
   },
   "devDependencies": {

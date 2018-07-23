@@ -1,6 +1,6 @@
 projects:
   app:
-    schemaPath: ./schema.graphql
+    schemaPath: ./typeDefs/index.js
     includes: ["**/*.graphql"]
     extensions:
       endpoints:

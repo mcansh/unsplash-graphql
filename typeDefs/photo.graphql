@@ -1,0 +1,31 @@
+type Photo {
+  id: ID!,
+  created_at: String!,
+  updated_at: String!,
+  width: Int!,
+  height: Int!,
+  color: String!,
+  description: String,
+  sponsored: Boolean,
+  likes: Int!,
+  liked_by_user: Boolean,
+  slug: String,
+  user: User!
+  links: PhotoLinks!
+}
+
+type PhotoLinks {
+  self: String!
+  html: String!
+  download: String!
+  download_location: String!
+}
+
+type Query {
+  photos(count: Int, collections: Int, random: Boolean): [Photo!]!
+  getPhotoById(id: ID!): Photo!
+}
+
+type Mutation {
+  likePhoto(id: ID!): Photo!
+}

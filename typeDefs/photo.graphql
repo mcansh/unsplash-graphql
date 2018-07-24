@@ -23,7 +23,7 @@ type PhotoExif {
   exposure_time: String!
   aperture: String!
   focal_length: String!
-  iso: Int!
+  iso: Float!
 }
 
 type PhotoLocation {
@@ -33,8 +33,8 @@ type PhotoLocation {
 }
 
 type PhotoCoordinates {
-  latitude: Int!
-  longitude: Int!
+  latitude: Float!
+  longitude: Float!
 }
 
 type PhotoLinks {

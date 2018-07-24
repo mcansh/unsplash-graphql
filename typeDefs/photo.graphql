@@ -38,5 +38,6 @@ type Query {
 }
 
 type Mutation {
-  likePhoto(id: ID!): Photo!
+  likePhoto(id: ID!, accessToken: String!): Photo!
+  downloadPhoto(id: ID!): Boolean!
 }

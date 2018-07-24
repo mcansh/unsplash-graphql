@@ -1,12 +1,24 @@
-import { getPhotos, me, likePhoto, getPhotoById } from '../fetches';
+import {
+  getPhotos,
+  me,
+  likePhoto,
+  getPhotoById,
+  downloadPhoto,
+} from '../fetches';
 
 const resolvers = {
   Mutation: {
-    likePhoto: async (_, { id }) => {
+    likePhoto: async (_, { id, accessToken }) => {
       try {
-        const photo = await likePhoto(id).then(r => r.json());
-        console.log(photo);
-        return photo;
+        const photo = await likePhoto({ id, accessToken }).then(r => r.json());
+        return photo.photo;
+      } catch (error) {
+        return error;
+      }
+    },
+    downloadPhoto: async (_, { id }) => {
+      try {
+        return downloadPhoto({ id });
       } catch (error) {
         return error;
       }

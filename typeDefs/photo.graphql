@@ -35,9 +35,10 @@ type Query {
   photos(count: Int, page: Int, orderBy: String, curated: Boolean): [Photo!]!
   randomPhoto(count: Int, collections: Int, featured: Boolean, query: String, width: Int, height: Int, username: String, orientation: String): [Photo!]!
   getPhotoById(id: ID!, width: Int, height: Int): Photo!
+  isLogin: Boolean!
 }
 
 type Mutation {
-  likePhoto(id: ID!, accessToken: String!): Photo!
+  likePhoto(id: ID!): Photo!
   downloadPhoto(id: ID!): Boolean!
 }

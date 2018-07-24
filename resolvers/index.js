@@ -8,9 +8,14 @@ import {
 
 const resolvers = {
   Mutation: {
-    likePhoto: async (_, { id, accessToken }) => {
+    likePhoto: async (_, { id }, { req }) => {
+      const { authorization } = req.headers;
       try {
-        const photo = await likePhoto({ id, accessToken }).then(r => r.json());
+        const photo = await likePhoto({ id, accessToken: authorization }).then(
+          r => r.json()
+        );
+        console.log(photo);
+
         return photo.photo;
       } catch (error) {
         return error;
@@ -25,6 +30,12 @@ const resolvers = {
     },
   },
   Query: {
+    isLogin: (parent, args, { req }) => {
+      const { authorization } = req.headers;
+      console.log({ authorization });
+
+      return !!authorization;
+    },
     photos: async (_, options) => getPhotos(options).then(r => r.json()),
     randomPhoto: async (_, options) =>
       getPhotos({ ...options, random: true }).then(r => r.json()),

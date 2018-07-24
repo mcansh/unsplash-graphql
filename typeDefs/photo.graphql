@@ -13,6 +13,28 @@ type Photo {
   user: User!
   links: PhotoLinks!
   urls: PhotoUrls!
+  exif: PhotoExif
+  location: PhotoLocation
+}
+
+type PhotoExif {
+  make: String!
+  model: String!
+  exposure_time: String!
+  aperture: String!
+  focal_length: String!
+  iso: Int!
+}
+
+type PhotoLocation {
+  city: String
+  country: String
+  position: PhotoCoordinates
+}
+
+type PhotoCoordinates {
+  latitude: Int!
+  longitude: Int!
 }
 
 type PhotoLinks {

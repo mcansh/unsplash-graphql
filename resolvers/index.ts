@@ -1,3 +1,4 @@
+// import  from 'apollo-server-micro'
 import {
   getPhotos,
   me,
@@ -8,20 +9,21 @@ import {
 
 const resolvers = {
   Mutation: {
-    likePhoto: async (_, { id }, { req }) => {
+    likePhoto: async (_, { id }: { id: string }, { req }: { req: any }) => {
+      console.log(req);
+
       const { authorization } = req.headers;
       try {
         const photo = await likePhoto({ id, accessToken: authorization }).then(
           r => r.json()
         );
-        console.log(photo);
 
         return photo.photo;
       } catch (error) {
         return error;
       }
     },
-    downloadPhoto: async (_, { id }) => {
+    downloadPhoto: async (_, { id }: { id: string }) => {
       try {
         return downloadPhoto({ id });
       } catch (error) {
@@ -30,17 +32,23 @@ const resolvers = {
     },
   },
   Query: {
-    isLogin: (parent, args, { req }) => {
+    isLogin: (_, _args, { req }) => {
       const { authorization } = req.headers;
-      console.log({ authorization });
 
       return !!authorization;
     },
-    photos: async (_, options) => getPhotos(options).then(r => r.json()),
-    randomPhoto: async (_, options) =>
-      getPhotos({ ...options, random: true }).then(r => r.json()),
-    getPhotoById: async (_, options) =>
-      getPhotoById(options).then(r => r.json()),
+    photos: async (_, args) => {
+      const promise = await getPhotos(args);
+      return promise.json();
+    },
+    randomPhoto: async (_, args) => {
+      const promise = await getPhotos({ ...args, random: true });
+      return promise.json();
+    },
+    getPhotoById: async (_, args) => {
+      const promise = await getPhotoById(args);
+      return promise.json();
+    },
     me: async () => me(),
   },
 };

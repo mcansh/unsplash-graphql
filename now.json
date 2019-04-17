@@ -1,5 +1,23 @@
 {
   "name": "unsplash",
-  "alias": "unsplash-api.loganmcansh.com",
-  "dotenv": ".env"
+  "version": 2,
+  "alias": [
+    "unsplash-api.loganmcansh.com"
+  ],
+  "env": {
+    "KEY": "@unsplash-key",
+    "SECRET": "@unsplash-secret"
+  },
+  "builds": [
+    {
+      "src": "index.ts",
+      "use": "@now/node@canary"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "index.ts"
+    }
+  ]
 }

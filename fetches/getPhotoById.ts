@@ -1,11 +1,16 @@
-import fetch from 'isomorphic-unfetch';
+import fetch from 'node-fetch';
 import getUrl, { headers } from './getUrl';
 
-const getPhotoById = async ({ id, width, height }) => {
-  console.log(id, width, height);
-
+const getPhotoById = async ({
+  id,
+  width,
+  height,
+}: {
+  id: string;
+  width?: number;
+  height?: number;
+}) => {
   const url = getUrl({ pathname: `/photos/${id}`, width, height });
-
   return fetch(url, { headers });
 };
 
